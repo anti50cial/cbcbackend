@@ -1,0 +1,4 @@
+-- AlterTable
+ALTER TABLE "public"."Applicant" ALTER COLUMN "age" DROP NOT NULL,
+ALTER COLUMN "gender" DROP NOT NULL,
+ALTER COLUMN "schoolName" DROP NOT NULL;
