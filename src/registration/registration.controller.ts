@@ -1,7 +1,7 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body, Patch } from '@nestjs/common';
 import { RegistrationService } from './registration.service';
 import { CreateRegistrationDto } from './dto/create-registration.dto';
-// import { UpdateRegistrationDto } from './dto/update-registration.dto';
+import { UpdateRegistrationDto } from './dto/update-registration.dto';
 
 @Controller('registration')
 export class RegistrationController {
@@ -9,10 +9,18 @@ export class RegistrationController {
 
   @Post()
   create(@Body() createRegistrationDto: CreateRegistrationDto) {
-    console.log(createRegistrationDto);
     return this.registrationService.create(createRegistrationDto);
   }
 
+  @Patch()
+  update(@Body() updatePaymentDto: UpdateRegistrationDto) {
+    return this.registrationService.update(updatePaymentDto);
+  }
+
+  @Post('verify-pin')
+  verifyPIN(@Body() data: { uniquePIN: string }) {
+    return this.registrationService.verifyPIN(data);
+  }
   // @Get()
   // findAll() {
   //   return this.registrationService.findAll();

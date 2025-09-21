@@ -11,13 +11,12 @@ import {
 export class CreateRegistrationDto {
   @IsNotEmpty()
   paymentReference: string;
-  @MaxLength(50, { message: 'Name too long.' })
-  @MinLength(3, { message: 'Name too short.' })
+  @MaxLength(50)
+  @MinLength(3)
   @IsString()
   @IsNotEmpty()
   fullName: string;
   @IsMobilePhone('en-NG')
-  @IsString()
   @IsNotEmpty()
   phoneNumber: string;
   @IsEmail()
