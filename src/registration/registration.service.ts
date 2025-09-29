@@ -19,7 +19,7 @@ export class RegistrationService {
         where: { paymentReference: createRegistrationDto.paymentReference },
         data: { ...createRegistrationDto, uniquePIN },
       });
-      return { success: true, uniquePIN: uniquePIN };
+      return { success: true, uniquePIN };
     } catch (error) {
       this.prismaErrorHandler.handle(error);
     }
