@@ -15,17 +15,38 @@ datasource db {
 }
 
 model Applicant {
-  id               Int       @id @default(autoincrement())
-  fullName         String?
-  phoneNumber      String?
-  email            String?
-  category         String?
-  uniquePIN        String?   @unique
-  gender           Gender?
-  schoolName       String?
-  age              Int?
-  dateJoined       DateTime? @default(now())
-  paymentReference String    @unique
+  id            Int      @id @default(autoincrement())
+  uniqueCode    String   @unique
+  regID         String   @unique
+  fullName      String
+  phoneNumber   String
+  email         String
+  category      String
+  gender        Gender
+  schoolName    String
+  parentName    String
+  parentContact String
+  location      String
+  age           Int
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model UniqueCode {
+  id        Int      @id @default(autoincrement())
+  code      String   @unique
+  isUsed    Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model RegistrationID {
+  id        Int      @id @default(autoincrement())
+  regID     String   @unique
+  category  String
+  isUsed    Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 enum Gender {
