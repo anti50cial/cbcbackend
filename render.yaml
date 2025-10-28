@@ -7,8 +7,8 @@ services:
     name: cbcbe
     env: node
     plan: free
-    buildCommand: pnpm install && pnpm prisma migrate deploy && pnpm run build
-    startCommand: pnpm prisma generate && pnpm run start:prod
+    buildCommand: yarn install && yarn prisma migrate deploy && yarn run build
+    startCommand: yarn prisma generate && yarn run start:prod
     envVars:
       - key: DATABASE_URL
         fromDatabase:

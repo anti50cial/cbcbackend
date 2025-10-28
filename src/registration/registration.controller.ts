@@ -1,4 +1,4 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body, Get } from '@nestjs/common';
 import { RegistrationService } from './registration.service';
 import { CreateRegistrationDto } from './dto/create-registration.dto';
 
@@ -15,10 +15,14 @@ export class RegistrationController {
   verifyCode(@Body() data: { uniqueCode: string }) {
     return this.registrationService.verifyCode(data);
   }
-  // @Get()
-  // findAll() {
-  //   return this.registrationService.findAll();
-  // }
+  @Get('all')
+  findAll() {
+    return this.registrationService.findAll();
+  }
+  @Get('unique-code')
+  findUniqueCodes() {
+    return this.registrationService.findUniqueCodes();
+  }
 
   // @Get(':id')
   // findOne(@Param('id') id: string) {

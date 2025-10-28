@@ -72,6 +72,19 @@ export class RegistrationService {
     // }
   }
 
+  async findAll() {
+    return await this.prismaService.applicant.findMany({
+      omit: { createdAt: true, updatedAt: true, id: true },
+    });
+  }
+
+  async findUniqueCodes() {
+    return await this.prismaService.uniqueCode.findMany({
+      where: { isUsed: false },
+      omit: { id: true },
+    });
+  }
+
   // async update(updateRegistrationDto: UpdateRegistrationDto) {
   //   try {
   //     await this.prismaService.applicant.update({
