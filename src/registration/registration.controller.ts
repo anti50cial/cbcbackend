@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get } from '@nestjs/common';
+import { Controller, Post, Body, Get, Header } from '@nestjs/common';
 import { RegistrationService } from './registration.service';
 import { CreateRegistrationDto } from './dto/create-registration.dto';
 
@@ -15,10 +15,16 @@ export class RegistrationController {
   verifyCode(@Body() data: { uniqueCode: string }) {
     return this.registrationService.verifyCode(data);
   }
+
   @Get('all')
+  @Header('Cache-Control', 'no-cache, no-store, must-revalidate')
+  @Header('Pragma', 'no-cache')
+  @Header('Expires', '0')
   findAll() {
     return this.registrationService.findAll();
+    // return this.registrationService.findAll();
   }
+
   @Get('unique-code')
   findUniqueCodes() {
     return this.registrationService.findUniqueCodes();
