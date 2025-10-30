@@ -1,6 +1,7 @@
-import { Controller, Post, Body, Get, Header } from '@nestjs/common';
+import { Controller, Post, Body, Get, Header, Res } from '@nestjs/common';
 import { RegistrationService } from './registration.service';
 import { CreateRegistrationDto } from './dto/create-registration.dto';
+import type { Response } from 'express';
 
 @Controller('registration')
 export class RegistrationController {
@@ -28,6 +29,10 @@ export class RegistrationController {
   @Get('unique-code')
   findUniqueCodes() {
     return this.registrationService.findUniqueCodes();
+  }
+  @Get('export')
+  export(@Res() res: Response) {
+    return this.registrationService.export(res);
   }
 
   // @Get(':id')
