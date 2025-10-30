@@ -3,6 +3,8 @@ import { CreateRegistrationDto } from './dto/create-registration.dto';
 // import { UpdateRegistrationDto } from './dto/update-registration.dto';
 // import { randomBytes } from 'crypto';
 import { PrismaErrorHandler, PrismaService } from 'src/prisma/prisma.service';
+import { Response } from 'express';
+import { format } from 'fast-csv';
 
 @Injectable()
 export class RegistrationService {
@@ -118,5 +120,18 @@ export class RegistrationService {
         message: 'Unique code is invalid or has already been used.',
       };
     }
+  }
+  async export(res: Response) {
+    const applicants = await this.prismaService.applicant.findMany({});
+    res.setHeader('Content-Type', 'text/csv');
+    res.setHeader(
+      'Content-Disposition',
+      'attachment; filename="delegates.csv"',
+    );
+    const csvStream = format({ headers: true });
+    csvStream.pipe(res);
+
+    applicants.forEach((d) => csvStream.write(d));
+    csvStream.end();
   }
 }
